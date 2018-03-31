@@ -9,3 +9,4 @@ D:\Dropbox\www\currentproject\ObjDoctor\ObjScaler\obj\Debug\ObjDoctor.csproj.Gen
 D:\Dropbox\www\currentproject\ObjDoctor\ObjScaler\obj\Debug\ObjDoctor.csproj.CoreCompileInputs.cache
 D:\Dropbox\www\currentproject\ObjDoctor\ObjScaler\obj\Debug\ObjScaler.exe
 D:\Dropbox\www\currentproject\ObjDoctor\ObjScaler\obj\Debug\ObjScaler.pdb
+D:\Dropbox\www\currentproject\ObjDoctor\ObjScaler\obj\Debug\ObjDoctor.csprojResolveAssemblyReference.cache

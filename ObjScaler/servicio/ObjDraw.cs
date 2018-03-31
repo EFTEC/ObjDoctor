@@ -19,7 +19,7 @@ namespace ObjScaler.servicio
             }
             var bitmap=new Bitmap(w,h);
             
-            var palette =new[] {Color.Blue,Color.Red, Color.LemonChiffon,Color.Green,Color.Aqua,Color.DarkGoldenrod};
+            var palette =new[] {Color.Blue,Color.Red, Color.DarkBlue,Color.Green,Color.SaddleBrown,Color.DarkGoldenrod};
 
             int halfh = h / 2;
             int halfw = w / 2;
