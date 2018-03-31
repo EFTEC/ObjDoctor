@@ -15,7 +15,7 @@ This program solves the next problem:
 ## How to run
 
 - Net Framework 4.6 or higher is required.  [Net framework 4.6](https://www.microsoft.com/en-us/download/details.aspx?id=48130)
-- Download and execute the program [Release version](https://github.com/EFTEC/ObjDoctor/tree/master/ObjScaler/bin/Release) [Debug version](https://github.com/EFTEC/ObjDoctor/tree/master/ObjScaler/bin/Debug)
+- Download and execute the program [Release version](https://github.com/EFTEC/ObjDoctor/tree/master/ObjScaler/bin/Release) or [Debug version](https://github.com/EFTEC/ObjDoctor/tree/master/ObjScaler/bin/Debug)
 - Or you could compile the program from source (visual studio 2017 or higher)
 
 ## Features:   
@@ -63,6 +63,10 @@ In the rescale screen, it's possible to rescale and translate the object.
 ### The figure must be scaled until the max height is 1000.
 
 - Uncheck (if it's checked) **ANCHOR MAX Y** and select **MAX Y** to 1000. The figure will be rescaled according this value.
+
+## Todo
+
+Maybe it's not compatible with every single obj file. If you have problems, then send me a report with the file.  Right now, the program crashes when it founds an unknown line command.
 
 
 
