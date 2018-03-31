@@ -180,7 +180,7 @@ namespace ObjScaler
                 var str=txt.Text.Replace(",", ".");
                 r = double.Parse(str, this.culture);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 return r;
             }
@@ -214,7 +214,7 @@ namespace ObjScaler
             {
                 d = ConvertTxt(txt,0);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 return;
             }
@@ -257,7 +257,7 @@ namespace ObjScaler
             {
                 d = Convert.ToDouble(txt.Text);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 return;
             }
@@ -393,7 +393,7 @@ namespace ObjScaler
             {
                 d = Convert.ToDouble(txt.Text);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 return;
             }

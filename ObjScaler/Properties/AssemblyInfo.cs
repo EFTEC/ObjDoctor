@@ -5,10 +5,9 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to Modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ObjScaler")]
-[assembly: AssemblyDescription(@"GNU GENERAL PUBLIC LICENSE
-
-Copyright (C) 2018 Jorge Castro Castillo
+[assembly: AssemblyTitle("Obj Doctor")]
+[assembly: AssemblyDescription(@"AGPL V3 
+Copyright(C) 2018 Jorge Castro Castillo
 Everyone is permitted to copy and distribute verbatim copies
 of this license document, but changing it is not allowed.")]
 [assembly: AssemblyConfiguration("")]
@@ -38,3 +37,5 @@ of this license document, but changing it is not allowed.")]
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.2.*")]
 [assembly: AssemblyFileVersion("1.2.65.0")]
+
+

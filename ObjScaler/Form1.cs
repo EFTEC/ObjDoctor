@@ -19,9 +19,8 @@ namespace ObjScaler
         private ObjSrv objSrv = new ObjSrv();
         private ObjDraw objDraw = new ObjDraw();
         private WaveFront _waveFront =null;
-        private Bitmap bitmap = null;
-        private bool _refresh=true;
-        private Rescale rescale=new Rescale();
+        private Bitmap _bitmap = null;
+        private Rescale _rescale=new Rescale();
         public Form1()
         {
             InitializeComponent();
@@ -78,7 +77,7 @@ namespace ObjScaler
                 return; //  nothing to draw.
             }
 
-            if (bitmap == null)
+            if (_bitmap == null)
             {
                 return;
             }
@@ -86,7 +85,7 @@ namespace ObjScaler
 
 
             // e.Graphics=Graphics.FromImage(bitmap);
-            e.Graphics.DrawImageUnscaled(bitmap, Point.Empty);
+            e.Graphics.DrawImageUnscaled(_bitmap, Point.Empty);
 
             //_refresh = false;
 
@@ -110,13 +109,13 @@ namespace ObjScaler
 
         private void panel1_SizeChanged(object sender, EventArgs e)
         {
-            if (_waveFront == null || bitmap == null)
+            if (_waveFront == null || _bitmap == null)
             {
                 return;
             }
             var scale = objSrv.Scale(_waveFront.max, _waveFront.min, panel1.Width, panel1.Height,0);
             int axis = comboBox1.SelectedIndex;
-            bitmap = objDraw.Draw(_waveFront,panel1.Width,panel1.Height,scale,axis);
+            _bitmap = objDraw.Draw(_waveFront,panel1.Width,panel1.Height,scale,axis);
             panel1.Refresh();
         }
 
@@ -128,12 +127,17 @@ namespace ObjScaler
             }
             var scale = objSrv.Scale(_waveFront.max, _waveFront.min, panel1.Width, panel1.Height,0);
             int axis = comboBox1.SelectedIndex;
-            bitmap = objDraw.Draw(_waveFront,panel1.Width,panel1.Height,scale,axis);
+            _bitmap = objDraw.Draw(_waveFront,panel1.Width,panel1.Height,scale,axis);
             panel1.Refresh();
         }
 
         private void buttonResize_Click(object sender, EventArgs e)
         {
+            if (_waveFront == null)
+            {
+                MessageBox.Show("You must load a OBJ first");
+                return;
+            }
             FormResize fr=new FormResize();
             
             // recover backup
@@ -141,12 +145,12 @@ namespace ObjScaler
             objSrv.ObjGetStat(_waveFront);
             
             fr.WaveFront = _waveFront;
-            fr.rescale = rescale;
+            fr.rescale = _rescale;
             fr.ShowDialog();
 
             if (!fr.ok)
             {
-                rescale=new Rescale(); // reset rescale
+                _rescale=new Rescale(); // reset rescale
                 return; // operation cancelled.
             }
 
@@ -157,7 +161,7 @@ namespace ObjScaler
             for (var i = 0; i < _waveFront.v.Count; i++)
             {
                 var v = _waveFront.v[i];
-                newList.Add(rescale.Modify(v));
+                newList.Add(_rescale.Modify(v));
             }
 
             _waveFront.v = newList; // changed the list
@@ -166,7 +170,7 @@ namespace ObjScaler
             DrawStat();
             var scale = objSrv.Scale(_waveFront.max, _waveFront.min, panel1.Width, panel1.Height,0);
             int axis = comboBox1.SelectedIndex;
-            bitmap = objDraw.Draw(_waveFront,panel1.Width,panel1.Height,scale,axis);
+            _bitmap = objDraw.Draw(_waveFront,panel1.Width,panel1.Height,scale,axis);
             panel1.Refresh();
             HideMsg();
             fr.Close();
@@ -215,7 +219,7 @@ namespace ObjScaler
             DrawStat();
             var scale = objSrv.Scale(_waveFront.max, _waveFront.min, panel1.Width, panel1.Height,0);
             int axis = comboBox1.SelectedIndex;
-            bitmap = objDraw.Draw(_waveFront,panel1.Width,panel1.Height,scale,axis);
+            _bitmap = objDraw.Draw(_waveFront,panel1.Width,panel1.Height,scale,axis);
             _waveFront.vBackup =objSrv.CloneList(_waveFront.v); // backup previous vectors.
             panel1.Refresh();
             HideMsg();
@@ -227,7 +231,7 @@ namespace ObjScaler
             if (String.IsNullOrEmpty(saveFileDialog1.FileName)) return;
             ShowMsg("Saving...");
             this.Text = "ObjScaler - " +Path.GetFileNameWithoutExtension( saveFileDialog1.FileName);
-            objSrv.ParseSave(_waveFront,rescale, saveFileDialog1.FileName);
+            objSrv.ParseSave(_waveFront,_rescale, saveFileDialog1.FileName);
             HideMsg();
             
         }
@@ -252,6 +256,12 @@ namespace ObjScaler
                 saveToolStripMenuItem_Click(sender, e);
             }
 
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Application.Exit();
         }
     }
 }

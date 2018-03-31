@@ -23,8 +23,8 @@ namespace ObjScaler.servicio
 
             int halfh = h / 2;
             int halfw = w / 2;
-            int x = 0, y = 0, z = 0;
-            int x2 = 0, y2 = 0, z2 = 0;
+            int x = 0, y = 0;
+            int x2 = 0, y2 = 0;
             FillBitmap(bitmap);
             double scale2 = scale / (double) 1.5;
             DrawLineInt(bitmap, halfw, 0, halfw, h,Color.Black);

@@ -95,7 +95,6 @@ namespace ObjScaler.servicio
                         break;
                     default:
                         throw new Exception("Error in group type :["+first+"]");
-                        break; 
                 }
 
             }
