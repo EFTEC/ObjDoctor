@@ -1,7 +1,7 @@
 # ObjDoctor
 Object Doctor is a small tool for open and edit Obj Wavefront 3d format files
 
-It allows to open, edit and save it back 3d model stored in Obj Wavefront format by retaining (in the possible) the format and information of the original file.   This program doesn't rebuild the OBJ file but it works based in the same file but only rebuilding the VERTEX and NORMALS.
+It allows to open, edit and save it back 3d model stored in Obj Wavefront format by **retaining the original format and information of the source file**.   This program doesn't rebuild the OBJ file but it works based in the same file by only rebuilding the information VERTEX and NORMALS.
 
 So, if a obj file contains 5000 lines, the result also contains 5000 files, even if the result was scaled or translated.
 
