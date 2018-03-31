@@ -1,0 +1,11 @@
+D:\Dropbox\www\currentproject\ObjDoctor\ObjScaler\bin\Debug\ObjScaler.exe.config
+D:\Dropbox\www\currentproject\ObjDoctor\ObjScaler\bin\Debug\ObjScaler.exe
+D:\Dropbox\www\currentproject\ObjDoctor\ObjScaler\bin\Debug\ObjScaler.pdb
+D:\Dropbox\www\currentproject\ObjDoctor\ObjScaler\obj\Debug\ObjScaler.AboutBox1.resources
+D:\Dropbox\www\currentproject\ObjDoctor\ObjScaler\obj\Debug\ObjScaler.Form1.resources
+D:\Dropbox\www\currentproject\ObjDoctor\ObjScaler\obj\Debug\ObjScaler.FormResize.resources
+D:\Dropbox\www\currentproject\ObjDoctor\ObjScaler\obj\Debug\ObjScaler.Properties.Resources.resources
+D:\Dropbox\www\currentproject\ObjDoctor\ObjScaler\obj\Debug\ObjDoctor.csproj.GenerateResource.Cache
+D:\Dropbox\www\currentproject\ObjDoctor\ObjScaler\obj\Debug\ObjDoctor.csproj.CoreCompileInputs.cache
+D:\Dropbox\www\currentproject\ObjDoctor\ObjScaler\obj\Debug\ObjScaler.exe
+D:\Dropbox\www\currentproject\ObjDoctor\ObjScaler\obj\Debug\ObjScaler.pdb
