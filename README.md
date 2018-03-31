@@ -12,6 +12,12 @@ This program solves the next problem:
 - It allows to scale the obj file without touching any other information of the OBJ file.
 - It allows to translate the obj file.   The translation could be done via ANCHORING a margin or via centering the object.
 
+## How to run
+
+- Net Framework 4.6 or higher is required.  [Net framework 4.6](https://www.microsoft.com/en-us/download/details.aspx?id=48130)
+- Download and execute the program [Release version](https://github.com/EFTEC/ObjDoctor/tree/master/ObjScaler/bin/Release) [Debug version](https://github.com/EFTEC/ObjDoctor/tree/master/ObjScaler/bin/Debug)
+- Or you could compile the program from source (visual studio 2017 or higher)
+
 ## Features:   
 - Compatible with 3dsmax, zbrush and Modo Obj Wavefront format, and may be another 3d program.  
 - It allows to rescale and translate a 3d model.
