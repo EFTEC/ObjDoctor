@@ -18,6 +18,48 @@ This program solves the next problem:
 - It shows statistics of the 3d object such as size, minimum, maximum, center and groups contained inside it.
 - It works using 64-bit float precision (15-16 digits precision).
 
+## How to use
+
+![image 1](https://raw.githubusercontent.com/EFTEC/ObjDoctor/master/docs/image1.jpg)
+
+In the first screen, you can see the OBJ file loaded (if any), you could load a new one or you could save a new OBJ file. 
+
+It also shows statistics of the model such as GROUPS (if the model has one), the dimensions, minimum, maximum and center of the mesh.
+
+![image 2](https://raw.githubusercontent.com/EFTEC/ObjDoctor/master/docs/image2.jpg)
+
+In the rescale screen, it's possible to rescale and translate the object.
+
+## Example of Usage
+
+### Move the figure over the Y axis.   
+
+- Check the option **ANCHOR MIN Y**
+- Select the **MIN Y** to 0.
+
+### Move the figure under the Y axis.   
+
+- Check the option **ANCHOR MAX Y**
+- Select the **MAX Y** to 0.
+
+### Center the figure in the X axis
+
+- Push the **Button CENTER X**
+
+### The figure is 500 wide (X) and I need to scale to 1300.
+
+- Change **Target Dimension X** to 1300.
+
+### The figure must be scaled 300%
+
+- Change the **Percentage** (at the right of Target Dimension) to 300.
+
+### The figure must be scaled until the max height is 1000.
+
+- Uncheck (if it's checked) **ANCHOR MAX Y** and select **MAX Y** to 1000. The figure will be rescaled according this value.
+
+
+
 
 
 
