@@ -1,47 +1,45 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ObjScaler.model
+
+namespace ObjDoctor.model
 {
     public class Rescale
     {
-        public double xScale=1.0d;
-        public double yScale=1.0d;
-        public double zScale=1.0d;
+        public double XScale=1.0d;
+        public double YScale=1.0d;
+        public double ZScale=1.0d;
 
-        public double xTranslate = 0d;
-        public double yTranslate = 0d;
-        public double zTranslate = 0d;
-        public bool anchorMaxX = false;
-        public bool anchorMaxY = false;
-        public bool anchorMaxZ = false;
-        public bool anchorMinX = false;
-        public bool anchorMinY = false;
-        public bool anchorMinZ = false;
+        public double XTranslate = 0d;
+        public double YTranslate = 0d;
+        public double ZTranslate = 0d;
+        public bool AnchorMaxX = false;
+        public bool AnchorMaxY = false;
+        public bool AnchorMaxZ = false;
+        public bool AnchorMinX = false;
+        public bool AnchorMinY = false;
+        public bool AnchorMinZ = false;
 
-        public bool keepRatio = true;
+        public bool KeepRatio = true;
     
 
         public Vector Modify(Vector v)
         {
             var re = new Vector();
-            re.x = (v.x + xTranslate) * xScale; 
-            re.y = (v.y + yTranslate) * yScale; 
-            re.z = (v.z + zTranslate) * zScale; 
+            re.X = (v.X + XTranslate) * XScale; 
+            re.Y = (v.Y + YTranslate) * YScale; 
+            re.Z = (v.Z + ZTranslate) * ZScale; 
             return re;
         }
         public Vector ModifyNormal(Vector v)
         {
-            var re = new Vector(v.x  * xScale,v.y  * yScale,v.z * zScale);
-            double magnitude =Math.Sqrt(re.x * re.x + re.y * re.y + re.z * re.z);
+            var re = new Vector(v.X  * XScale,v.Y  * YScale,v.Z * ZScale);
+            double magnitude =Math.Sqrt(re.X * re.X + re.Y * re.Y + re.Z * re.Z);
             // normalizing
-            re.x = re.x / magnitude;
-            re.y = re.y / magnitude;
-            re.z = re.z / magnitude;
+            re.X = re.X / magnitude;
+            re.Y = re.Y / magnitude;
+            re.Z = re.Z / magnitude;
             return re;
         }
     }
 }
+// Copyright Jorge Castro Castillo March 2018.

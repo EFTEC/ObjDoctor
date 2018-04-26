@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ObjScaler.model
+namespace ObjDoctor.model
 {
     public class Face
     {
@@ -14,3 +14,4 @@ namespace ObjScaler.model
         
     }
 }
+// Copyright Jorge Castro Castillo March 2018.

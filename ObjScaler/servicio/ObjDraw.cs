@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ObjScaler.model;
 
-namespace ObjScaler.servicio
+using System.Drawing;
+
+using ObjDoctor.model;
+
+namespace ObjDoctor.servicio
 {
+    
     class ObjDraw
     {
         public Bitmap Draw(WaveFront waveFront,int w,int h,double scale,int axis=0)
@@ -26,7 +25,7 @@ namespace ObjScaler.servicio
             int x = 0, y = 0;
             int x2 = 0, y2 = 0;
             FillBitmap(bitmap);
-            double scale2 = scale / (double) 1.5;
+            double scale2 = scale / 1.5d;
             DrawLineInt(bitmap, halfw, 0, halfw, h,Color.Black);
             DrawLineInt(bitmap,0, halfh, w, halfh,Color.Black);
 
@@ -61,7 +60,7 @@ namespace ObjScaler.servicio
             }
             */
       
-            foreach (var mesh in waveFront.o)
+            foreach (var mesh in waveFront.O)
             {
 
 
@@ -81,34 +80,34 @@ namespace ObjScaler.servicio
                         int e =(i<grupo.f.Count-1)?i + 1:0; // we close the face
                         var idxV1 = grupo.f[i];
                         var idxV2 = grupo.f[e];
-                        var vector = waveFront.v[idxV1.v - 1];
-                        var vector2 = waveFront.v[idxV2.v - 1];
+                        var vector = waveFront.V[idxV1.v - 1];
+                        var vector2 = waveFront.V[idxV2.v - 1];
                         switch (axis)
                         {
                             case 0:
-                                x =  Convert.ToInt32(vector.x * scale)+halfw;
-                                y = halfh - Convert.ToInt32(vector.y * scale);
-                                x2 =  Convert.ToInt32(vector2.x * scale)+halfw ;
-                                y2 = halfh - Convert.ToInt32(vector2.y * scale);
+                                x =  Convert.ToInt32(vector.X * scale)+halfw;
+                                y = halfh - Convert.ToInt32(vector.Y * scale);
+                                x2 =  Convert.ToInt32(vector2.X * scale)+halfw ;
+                                y2 = halfh - Convert.ToInt32(vector2.Y * scale);
                                 break;
                             case 1:
-                                x =  Convert.ToInt32(vector.x * scale)+halfw ;
-                                y = halfh - Convert.ToInt32(vector.z * scale);
-                                x2 =  Convert.ToInt32(vector2.x * scale)+halfw;
-                                y2 = halfh - Convert.ToInt32(vector2.z * scale);
+                                x =  Convert.ToInt32(vector.X * scale)+halfw ;
+                                y = halfh - Convert.ToInt32(vector.Z * scale);
+                                x2 =  Convert.ToInt32(vector2.X * scale)+halfw;
+                                y2 = halfh - Convert.ToInt32(vector2.Z * scale);
                                 break;
                             case 2:
-                                x =  Convert.ToInt32(vector.y * scale)+halfw;
-                                y = halfh - Convert.ToInt32(vector.z * scale);
-                                x2 =  Convert.ToInt32(vector2.y * scale)+halfw;
-                                y2 = halfh - Convert.ToInt32(vector2.z * scale);
+                                x =  Convert.ToInt32(vector.Y * scale)+halfw;
+                                y = halfh - Convert.ToInt32(vector.Z * scale);
+                                x2 =  Convert.ToInt32(vector2.Y * scale)+halfw;
+                                y2 = halfh - Convert.ToInt32(vector2.Z * scale);
                                 break;
                             case 3:
                                 
-                                x =  Convert.ToInt32(vector.x+(vector.z/2) * scale2)+halfw;
-                                y = halfh - Convert.ToInt32(vector.y+(vector.z/2) * scale2);
-                                x2 =  Convert.ToInt32(vector2.x+(vector2.z/2) * scale2)+halfw;
-                                y2 = halfh - Convert.ToInt32(vector2.y+(vector2.z/2) * scale2);
+                                x =  Convert.ToInt32(vector.X+(vector.Z/2) * scale2)+halfw;
+                                y = halfh - Convert.ToInt32(vector.Y+(vector.Z/2) * scale2);
+                                x2 =  Convert.ToInt32(vector2.X+(vector2.Z/2) * scale2)+halfw;
+                                y2 = halfh - Convert.ToInt32(vector2.Y+(vector2.Z/2) * scale2);
                                 break;
                         }
 
@@ -145,3 +144,5 @@ namespace ObjScaler.servicio
 
     }
 }
+
+// Copyright Jorge Castro Castillo March 2018.

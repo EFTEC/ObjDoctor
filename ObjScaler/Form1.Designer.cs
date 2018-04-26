@@ -1,4 +1,4 @@
-﻿namespace ObjScaler
+﻿namespace ObjDoctor
 {
     partial class Form1
     {
@@ -353,7 +353,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
-            this.Text = "Obj Scaler - No File";
+            this.Text = "Obj Doctor - No File";
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);

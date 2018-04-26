@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{64C78993-F0CC-4469-9A48-8F78E1A834D9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ObjScaler</RootNamespace>
-    <AssemblyName>ObjScaler</AssemblyName>
+    <RootNamespace>ObjDoctor</RootNamespace>
+    <AssemblyName>ObjDoctor</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -93,6 +93,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

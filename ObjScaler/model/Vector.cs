@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ObjScaler.model
+﻿
+namespace ObjDoctor.model
 {
     public class Vector 
     {
-        public double x;
-        public double y;
-        public double z;
+        public double X;
+        public double Y;
+        public double Z;
 
         public Vector()
         {
@@ -18,14 +13,15 @@ namespace ObjScaler.model
 
         public Vector(double x, double y, double z)
         {
-            this.x = x;
-            this.y = y;
-            this.z = z;
+            this.X = x;
+            this.Y = y;
+            this.Z = z;
         }
 
         public Vector Clone()
         {
-            return new Vector(x, y, z);
+            return new Vector(X, Y, Z);
         }
     }
 }
+// Copyright Jorge Castro Castillo March 2018.

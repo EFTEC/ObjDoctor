@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ObjScaler.model;
+using ObjDoctor.model;
 
-namespace ObjScaler
+namespace ObjDoctor
 {
     public partial class FormResize : Form
     {
@@ -59,20 +59,20 @@ namespace ObjScaler
         #endregion
         private void RefreshTxt()
         {
-            var deltaX = WaveFront.max.x - WaveFront.min.x;
-            var deltaY = WaveFront.max.y - WaveFront.min.y;
-            var deltaZ = WaveFront.max.z - WaveFront.min.z;
+            var deltaX = WaveFront.Max.X - WaveFront.Min.X;
+            var deltaY = WaveFront.Max.Y - WaveFront.Min.Y;
+            var deltaZ = WaveFront.Max.Z - WaveFront.Min.Z;
 
             noEvent = true;
 
-            chkRatio.Checked = rescale.keepRatio;
+            chkRatio.Checked = rescale.KeepRatio;
      
-            chkAnchorMaxX.Checked = rescale.anchorMaxX;
-            chkAnchorMaxY.Checked = rescale.anchorMaxY;
-            chkAnchorMaxZ.Checked = rescale.anchorMaxZ;
-            chkAnchorMinX.Checked = rescale.anchorMinX;
-            chkAnchorMinY.Checked = rescale.anchorMinY;
-            chkAnchorMinZ.Checked = rescale.anchorMinZ;
+            chkAnchorMaxX.Checked = rescale.AnchorMaxX;
+            chkAnchorMaxY.Checked = rescale.AnchorMaxY;
+            chkAnchorMaxZ.Checked = rescale.AnchorMaxZ;
+            chkAnchorMinX.Checked = rescale.AnchorMinX;
+            chkAnchorMinY.Checked = rescale.AnchorMinY;
+            chkAnchorMinZ.Checked = rescale.AnchorMinZ;
 
             double transX = 0,transY = 0,transZ = 0;
 
@@ -80,83 +80,83 @@ namespace ObjScaler
             
 
 
-            txtDimX.Text = (deltaX * rescale.xScale).ToString(culture);
-            txtDimY.Text = (deltaY * rescale.yScale).ToString(culture);
-            txtDimZ.Text = (deltaZ * rescale.zScale).ToString(culture);
+            txtDimX.Text = (deltaX * rescale.XScale).ToString(culture);
+            txtDimY.Text = (deltaY * rescale.YScale).ToString(culture);
+            txtDimZ.Text = (deltaZ * rescale.ZScale).ToString(culture);
 
-            txtPerX.Text=(rescale.xScale*100).ToString(culture);
-            txtPerY.Text=(rescale.yScale*100).ToString(culture);
-            txtPerZ.Text=(rescale.zScale*100).ToString(culture);
+            txtPerX.Text=(rescale.XScale*100).ToString(culture);
+            txtPerY.Text=(rescale.YScale*100).ToString(culture);
+            txtPerZ.Text=(rescale.ZScale*100).ToString(culture);
 
-            if (rescale.anchorMaxY)
+            if (rescale.AnchorMaxY)
             {
                 transY =  ConvertTxt(txtMaxY, 0);
-                rescale.yTranslate =  transY-WaveFront.max.y;
-                txtMinY.Text = (transY-(deltaY*rescale.yScale)).ToString(culture);
+                rescale.YTranslate =  transY-WaveFront.Max.Y;
+                txtMinY.Text = (transY-(deltaY*rescale.YScale)).ToString(culture);
                 //txtMaxY.Text = ((WaveFront.max.y * rescale.yScale)-rescale.yTranslate).ToString(culture);
             }
-            if (rescale.anchorMinY)
+            if (rescale.AnchorMinY)
             {
                 transY =  ConvertTxt(txtMinY, 0);
-                rescale.yTranslate = transY-WaveFront.min.y;
-                txtMaxY.Text = (transY+(deltaY*rescale.yScale)).ToString(culture);
+                rescale.YTranslate = transY-WaveFront.Min.Y;
+                txtMaxY.Text = (transY+(deltaY*rescale.YScale)).ToString(culture);
                 //txtMaxY.Text = ((WaveFront.max.y * rescale.yScale)-rescale.yTranslate).ToString(culture);
             }
 
-            if (!rescale.anchorMaxY && !rescale.anchorMinY)
+            if (!rescale.AnchorMaxY && !rescale.AnchorMinY)
             {
-                rescale.yTranslate = 0;                
+                rescale.YTranslate = 0;                
                 // quizas la escala es recalculada.
-                txtMaxY.Text = (WaveFront.max.y * rescale.yScale).ToString(culture);
-                txtMinY.Text = (WaveFront.min.y * rescale.yScale).ToString(culture);  
+                txtMaxY.Text = (WaveFront.Max.Y * rescale.YScale).ToString(culture);
+                txtMinY.Text = (WaveFront.Min.Y * rescale.YScale).ToString(culture);  
                 
             }
-            if (rescale.anchorMaxX)
+            if (rescale.AnchorMaxX)
             {
                 transX =  ConvertTxt(txtMaxX, 0);
-                rescale.xTranslate = transX-WaveFront.max.x ;
+                rescale.XTranslate = transX-WaveFront.Max.X ;
                 
-                txtMinX.Text = (transX-(deltaX*rescale.xScale)).ToString(culture);
+                txtMinX.Text = (transX-(deltaX*rescale.XScale)).ToString(culture);
                 //txtMaxX.Text = ((WaveFront.max.x * rescale.xScale)-rescale.xTranslate).ToString(culture);
             }
-            if (rescale.anchorMinX)
+            if (rescale.AnchorMinX)
             {
                 transX =  ConvertTxt(txtMinX, 0);
-                rescale.xTranslate = transX-WaveFront.min.x;
+                rescale.XTranslate = transX-WaveFront.Min.X;
                 
-                txtMaxX.Text = (transX+(deltaX*rescale.xScale)).ToString(culture);
+                txtMaxX.Text = (transX+(deltaX*rescale.XScale)).ToString(culture);
                 //txtMaxX.Text = ((WaveFront.max.x * rescale.xScale)-rescale.xTranslate).ToString(culture);
             }
 
-            if (!rescale.anchorMaxX && !rescale.anchorMinX)
+            if (!rescale.AnchorMaxX && !rescale.AnchorMinX)
             {
-                rescale.xTranslate = 0;                
+                rescale.XTranslate = 0;                
                 // quizas la escala es recalculada.
-                txtMaxX.Text = (WaveFront.max.x * rescale.xScale).ToString(culture);
-                txtMinX.Text = (WaveFront.min.x * rescale.xScale).ToString(culture);  
+                txtMaxX.Text = (WaveFront.Max.X * rescale.XScale).ToString(culture);
+                txtMinX.Text = (WaveFront.Min.X * rescale.XScale).ToString(culture);  
                 
             }
-            if (rescale.anchorMaxZ)
+            if (rescale.AnchorMaxZ)
             {
                 transZ =  ConvertTxt(txtMaxZ, 0);
-                rescale.zTranslate =   transZ-WaveFront.max.z;
-                txtMinZ.Text = (transZ-(deltaZ*rescale.zScale)).ToString(culture);
+                rescale.ZTranslate =   transZ-WaveFront.Max.Z;
+                txtMinZ.Text = (transZ-(deltaZ*rescale.ZScale)).ToString(culture);
                 //txtMaxZ.Text = ((WaveFront.max.z * rescale.zScale)-rescale.zTranslate).ToString(culture);
             }
-            if (rescale.anchorMinZ)
+            if (rescale.AnchorMinZ)
             {
                 transZ =  ConvertTxt(txtMinZ, 0);
-                rescale.zTranslate = transZ-WaveFront.min.z;
-                txtMaxZ.Text = (transZ+(deltaZ*rescale.zScale)).ToString(culture);
+                rescale.ZTranslate = transZ-WaveFront.Min.Z;
+                txtMaxZ.Text = (transZ+(deltaZ*rescale.ZScale)).ToString(culture);
                 //txtMaxZ.Text = ((WaveFront.max.z * rescale.zScale)-rescale.zTranslate).ToString(culture);
             }
 
-            if (!rescale.anchorMaxZ && !rescale.anchorMinZ)
+            if (!rescale.AnchorMaxZ && !rescale.AnchorMinZ)
             {
-                rescale.zTranslate = 0;                
+                rescale.ZTranslate = 0;                
                 // quizas la escala es recalculada.
-                txtMaxZ.Text = (WaveFront.max.z * rescale.zScale).ToString(culture);
-                txtMinZ.Text = (WaveFront.min.z * rescale.zScale).ToString(culture);  
+                txtMaxZ.Text = (WaveFront.Max.Z * rescale.ZScale).ToString(culture);
+                txtMinZ.Text = (WaveFront.Min.Z * rescale.ZScale).ToString(culture);  
                 
             }
             /*
@@ -168,7 +168,9 @@ namespace ObjScaler
             txtMinY.Text = (WaveFront.min.y * rescale.yScale).ToString(culture);
             txtMinZ.Text = (WaveFront.min.z * rescale.zScale).ToString(culture);
             */
-
+            txtDispX.Text=rescale.XTranslate.ToString(culture);
+            txtDispY.Text=rescale.YTranslate.ToString(culture);
+            txtDispZ.Text=rescale.ZTranslate.ToString(culture);
             noEvent = false;
         }
 
@@ -190,7 +192,7 @@ namespace ObjScaler
         private void chkRatio_CheckedChanged(object sender, EventArgs e)
         {
             if (noEvent) return;
-            rescale.keepRatio = chkRatio.Checked;
+            rescale.KeepRatio = chkRatio.Checked;
             RefreshTxt();
         }
 
@@ -221,27 +223,27 @@ namespace ObjScaler
             switch (type)
             {
                 case "x":
-                    rescale.xScale = d / 100;
-                    if (rescale.keepRatio)
+                    rescale.XScale = d / 100;
+                    if (rescale.KeepRatio)
                     {
-                        rescale.yScale = rescale.xScale;
-                        rescale.zScale = rescale.xScale;
+                        rescale.YScale = rescale.XScale;
+                        rescale.ZScale = rescale.XScale;
                     }
                     break;
                 case "y":
-                    rescale.yScale = d / 100;
-                    if (rescale.keepRatio)
+                    rescale.YScale = d / 100;
+                    if (rescale.KeepRatio)
                     {
-                        rescale.xScale = rescale.yScale;
-                        rescale.zScale = rescale.yScale;
+                        rescale.XScale = rescale.YScale;
+                        rescale.ZScale = rescale.YScale;
                     }
                     break;
                 case "z":
-                    rescale.zScale = d / 100;
-                    if (rescale.keepRatio)
+                    rescale.ZScale = d / 100;
+                    if (rescale.KeepRatio)
                     {
-                        rescale.xScale = rescale.zScale;
-                        rescale.yScale = rescale.zScale;
+                        rescale.XScale = rescale.ZScale;
+                        rescale.YScale = rescale.ZScale;
                     }
                     break;
             }
@@ -261,34 +263,34 @@ namespace ObjScaler
             {
                 return;
             }
-            var deltaX = WaveFront.max.x - WaveFront.min.x;
-            var deltaY = WaveFront.max.y - WaveFront.min.y;
-            var deltaZ = WaveFront.max.z - WaveFront.min.z;
+            var deltaX = WaveFront.Max.X - WaveFront.Min.X;
+            var deltaY = WaveFront.Max.Y - WaveFront.Min.Y;
+            var deltaZ = WaveFront.Max.Z - WaveFront.Min.Z;
             switch (type)
             {
 
                 case "x":
-                    rescale.xScale = d / deltaX;
-                    if (rescale.keepRatio)
+                    rescale.XScale = d / deltaX;
+                    if (rescale.KeepRatio)
                     {
-                        rescale.yScale = rescale.xScale;
-                        rescale.zScale = rescale.xScale;
+                        rescale.YScale = rescale.XScale;
+                        rescale.ZScale = rescale.XScale;
                     }
                     break;
                 case "y":
-                    rescale.yScale = d / deltaY;
-                    if (rescale.keepRatio)
+                    rescale.YScale = d / deltaY;
+                    if (rescale.KeepRatio)
                     {
-                        rescale.xScale = rescale.yScale;
-                        rescale.zScale = rescale.yScale;
+                        rescale.XScale = rescale.YScale;
+                        rescale.ZScale = rescale.YScale;
                     }
                     break;
                 case "z":
-                    rescale.zScale = d / deltaZ;
-                    if (rescale.keepRatio)
+                    rescale.ZScale = d / deltaZ;
+                    if (rescale.KeepRatio)
                     {
-                        rescale.xScale = rescale.zScale;
-                        rescale.yScale = rescale.zScale;
+                        rescale.XScale = rescale.ZScale;
+                        rescale.YScale = rescale.ZScale;
                     }
                     break;
             }
@@ -320,10 +322,10 @@ namespace ObjScaler
             if (noEvent) return;
             noEvent = true;
             var chk = (CheckBox) sender;
-            rescale.anchorMaxX = chk.Checked;
+            rescale.AnchorMaxX = chk.Checked;
             if (chk.Checked)
             {
-                rescale.anchorMinX = false;
+                rescale.AnchorMinX = false;
             }       
             noEvent = false;
             RefreshTxt();
@@ -368,10 +370,10 @@ namespace ObjScaler
             if (noEvent) return;
             noEvent = true;
             var chk = (CheckBox) sender;
-            rescale.anchorMaxY = chk.Checked;
+            rescale.AnchorMaxY = chk.Checked;
             if (chk.Checked)
             {
-                rescale.anchorMinY = false;
+                rescale.AnchorMinY = false;
             }       
             noEvent = false;
             RefreshTxt();
@@ -397,34 +399,34 @@ namespace ObjScaler
             {
                 return;
             }
-            var deltaX = WaveFront.max.x - WaveFront.min.x;
-            var deltaY = WaveFront.max.y - WaveFront.min.y;
-            var deltaZ = WaveFront.max.z - WaveFront.min.z;
+            var deltaX = WaveFront.Max.X - WaveFront.Min.X;
+            var deltaY = WaveFront.Max.Y - WaveFront.Min.Y;
+            var deltaZ = WaveFront.Max.Z - WaveFront.Min.Z;
             switch (type)
             {
 
                 case "maxx":
-                    rescale.xScale = d / deltaX;
-                    if (rescale.keepRatio)
+                    rescale.XScale = d / deltaX;
+                    if (rescale.KeepRatio)
                     {
-                        rescale.yScale = rescale.xScale;
-                        rescale.zScale = rescale.xScale;
+                        rescale.YScale = rescale.XScale;
+                        rescale.ZScale = rescale.XScale;
                     }
                     break;
                 case "y":
-                    rescale.yScale = d / deltaY;
-                    if (rescale.keepRatio)
+                    rescale.YScale = d / deltaY;
+                    if (rescale.KeepRatio)
                     {
-                        rescale.xScale = rescale.yScale;
-                        rescale.zScale = rescale.yScale;
+                        rescale.XScale = rescale.YScale;
+                        rescale.ZScale = rescale.YScale;
                     }
                     break;
                 case "z":
-                    rescale.zScale = d / deltaZ;
-                    if (rescale.keepRatio)
+                    rescale.ZScale = d / deltaZ;
+                    if (rescale.KeepRatio)
                     {
-                        rescale.xScale = rescale.zScale;
-                        rescale.yScale = rescale.zScale;
+                        rescale.XScale = rescale.ZScale;
+                        rescale.YScale = rescale.ZScale;
                     }
                     break;
             }
@@ -483,42 +485,42 @@ namespace ObjScaler
             switch (txt) 
             {
                 case "maxx":                    
-                    original = WaveFront.max.x;
+                    original = WaveFront.Max.X;
                     proportion =  this.ConvertTxt(txtBox, 0)/original;
                     txtTmp.Text = (proportion*100).ToString(this.culture);
                     PerChanged(txtTmp,"x");
                     //DimChanged("");
                     break;
                 case "minx":
-                    original = WaveFront.min.x;
+                    original = WaveFront.Min.X;
                     proportion =  this.ConvertTxt(txtBox, 0)/original;
                     txtTmp.Text = (proportion*100).ToString(this.culture);
                     PerChanged(txtTmp,"x");
                     //DimChanged("");
                     break;
                 case "maxy":                    
-                    original = WaveFront.max.y;
+                    original = WaveFront.Max.Y;
                     proportion =  this.ConvertTxt(txtBox, 0)/original;
                     txtTmp.Text = (proportion*100).ToString(this.culture);
                     PerChanged(txtTmp,"y");
                     //DimChanged("");
                     break;
                 case "miny":
-                    original = WaveFront.min.y;
+                    original = WaveFront.Min.Y;
                     proportion =  this.ConvertTxt(txtBox, 0)/original;
                     txtTmp.Text = (proportion*100).ToString(this.culture);
                     PerChanged(txtTmp,"y");
                     //DimChanged("");
                     break;
                 case "maxz":                    
-                    original = WaveFront.max.z;
+                    original = WaveFront.Max.Z;
                     proportion =  this.ConvertTxt(txtBox, 0)/original;
                     txtTmp.Text = (proportion*100).ToString(this.culture);
                     PerChanged(txtTmp,"z");
                     //DimChanged("");
                     break;
                 case "minz":
-                    original = WaveFront.min.z;
+                    original = WaveFront.Min.Z;
                     proportion =  this.ConvertTxt(txtBox, 0)/original;
                     txtTmp.Text = (proportion*100).ToString(this.culture);
                     PerChanged(txtTmp,"z");
@@ -536,10 +538,10 @@ namespace ObjScaler
             if (noEvent) return;
             noEvent = true;
             var chk = (CheckBox) sender;
-            rescale.anchorMinY = chk.Checked;
+            rescale.AnchorMinY = chk.Checked;
             if (chk.Checked)
             {
-                rescale.anchorMaxY = false;
+                rescale.AnchorMaxY = false;
             }       
             noEvent = false;
             RefreshTxt();
@@ -550,10 +552,10 @@ namespace ObjScaler
             if (noEvent) return;
             noEvent = true;
             var chk = (CheckBox) sender;
-            rescale.anchorMinZ = chk.Checked;
+            rescale.AnchorMinZ = chk.Checked;
             if (chk.Checked)
             {
-                rescale.anchorMaxZ = false;
+                rescale.AnchorMaxZ = false;
             }       
             noEvent = false;
             RefreshTxt();
@@ -564,10 +566,10 @@ namespace ObjScaler
             if (noEvent) return;
             noEvent = true;
             var chk = (CheckBox) sender;
-            rescale.anchorMaxZ = chk.Checked;
+            rescale.AnchorMaxZ = chk.Checked;
             if (chk.Checked)
             {
-                rescale.anchorMinZ = false;
+                rescale.AnchorMinZ = false;
             }       
             noEvent = false;
             RefreshTxt();
@@ -578,10 +580,10 @@ namespace ObjScaler
             if (noEvent) return;
             noEvent = true;
             var chk = (CheckBox) sender;
-            rescale.anchorMinX = chk.Checked;
+            rescale.AnchorMinX = chk.Checked;
             if (chk.Checked)
             {
-                rescale.anchorMaxX = false;
+                rescale.AnchorMaxX = false;
             }       
             noEvent = false;
             RefreshTxt();
@@ -592,31 +594,31 @@ namespace ObjScaler
             noEvent = true;
             Button btn = (Button) sender;
 
-            var deltaX = WaveFront.max.x - WaveFront.min.x;
-            var deltaY = WaveFront.max.y - WaveFront.min.y;
-            var deltaZ = WaveFront.max.z - WaveFront.min.z;
+            var deltaX = WaveFront.Max.X - WaveFront.Min.X;
+            var deltaY = WaveFront.Max.Y - WaveFront.Min.Y;
+            var deltaZ = WaveFront.Max.Z - WaveFront.Min.Z;
 
             switch (btn.Tag.ToString())
             {
                 case "x":
-                    rescale.anchorMaxX = true;
-                    rescale.anchorMinX = false;
+                    rescale.AnchorMaxX = true;
+                    rescale.AnchorMinX = false;
                                         
-                    txtMaxX.Text=(deltaX * rescale.xScale / 2).ToString(culture);
+                    txtMaxX.Text=(deltaX * rescale.XScale / 2).ToString(culture);
                     
                     break;
                 case "y":
-                    rescale.anchorMaxY = true;
-                    rescale.anchorMinY = false;
+                    rescale.AnchorMaxY = true;
+                    rescale.AnchorMinY = false;
                                         
-                    txtMaxY.Text=(deltaY * rescale.yScale / 2).ToString(culture);
+                    txtMaxY.Text=(deltaY * rescale.YScale / 2).ToString(culture);
                     
                     break;
                 case "z":
-                    rescale.anchorMaxZ = true;
-                    rescale.anchorMinZ = false;
+                    rescale.AnchorMaxZ = true;
+                    rescale.AnchorMinZ = false;
                                         
-                    txtMaxZ.Text=(deltaZ * rescale.zScale / 2).ToString(culture);
+                    txtMaxZ.Text=(deltaZ * rescale.ZScale / 2).ToString(culture);
                     
                     break;
             }
@@ -635,6 +637,33 @@ namespace ObjScaler
         {
             ok = false;
             this.Close();
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDispX_TextChanged(object sender, EventArgs e)
+        {
+            if (noEvent) return;
+            noEvent = true;
+            double val = ConvertTxt((TextBox) sender, 0);
+            if (chkAnchorMaxX.Checked)
+            {
+                rescale.XTranslate = val;
+    
+            }
+            else
+            {
+                rescale.XTranslate = val;
+          
+            }
+            double exp = WaveFront.Max.X * rescale.XScale + rescale.XTranslate;
+            txtMaxX.Text=(exp).ToString(culture);
+            exp = WaveFront.Min.X * rescale.XScale + rescale.XTranslate;
+            txtMinX.Text=(exp).ToString(culture);
+            noEvent = false;
         }
     }
 }

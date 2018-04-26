@@ -1,4 +1,4 @@
-﻿namespace ObjScaler
+﻿namespace ObjDoctor
 {
     partial class AboutBox1
     {

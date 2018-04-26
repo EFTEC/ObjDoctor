@@ -1,27 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
+
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ObjScaler.model;
 
-namespace ObjScaler.servicio
+using ObjDoctor.model;
+
+namespace ObjDoctor.servicio
 {
     class ObjSrv
     {
         CultureInfo culture = new CultureInfo("en-US");
-        public enum ObjMode
-        {
-            header,mesh,group
-        }
+
         public string ReadFile(string file)
         {
-            var r = "";
-            r = File.ReadAllText(file);
-            r=r.Replace("\r", ""); 
+            var r =File.ReadAllText(file).Replace("\r", "");
             return r;
         }
 
@@ -30,9 +24,7 @@ namespace ObjScaler.servicio
             var lines = txt.Split(new[] {"\n"},StringSplitOptions.None);
             
             var r = new WaveFront();
-            r.original = lines.ToList();
-
-            var mode = ObjMode.header;
+            r.Original = lines.ToList();
             
             foreach (var line in lines)
             {
@@ -43,11 +35,10 @@ namespace ObjScaler.servicio
 
                 var cont = line.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
                 var first = cont[0];
-                var p = line.IndexOf(" ");
-                var second = "";
-                second = p < 0 ? "" : line.Substring(p + 1);
+                var p = line.IndexOf(" ", StringComparison.Ordinal);
+                string second= p < 0 ? "" : line.Substring(p + 1);
 
-                mode=ParseHeader(cont, first,second, r);
+                ParseHeader(cont, first,second, r);
             }           
             return r;
         }
@@ -55,7 +46,7 @@ namespace ObjScaler.servicio
         public void ParseSave(WaveFront wave,Rescale rescale,string fileName)
         {
             var linesFinal = new List<string>();
-            foreach (var line in wave.original)
+            foreach (var line in wave.Original)
             {
                 if (line == "")
                 {
@@ -70,9 +61,6 @@ namespace ObjScaler.servicio
                 }
                 var cont = line.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
                 var first = cont[0];
-                var p = line.IndexOf(" ");
-                var second = "";
-                second = p < 0 ? "" : line.Substring(p + 1);
                 switch (first)
                 {
                     case "o":
@@ -104,20 +92,20 @@ namespace ObjScaler.servicio
             
         }
 
-        private ObjMode ParseHeader(string[] line,string first,string second, WaveFront waveFront)
+        private void ParseHeader(string[] line,string first,string second, WaveFront waveFront)
         {
-            var r = ObjMode.header;
-            var curMesh = waveFront.o.LastOrDefault();
+ 
+            var curMesh = waveFront.O.LastOrDefault();
             var curGroup =curMesh?.group.LastOrDefault();
             switch (first)
             {
                 case "#":
-                    waveFront.com.Add(second);
+                    waveFront.Com.Add(second);
                     break;
                 case "o":
                     Mesh mesh=new Mesh();
                     mesh.name = second;
-                    waveFront.o.Add(mesh);
+                    waveFront.O.Add(mesh);
                     //r = ObjMode.mesh; // cambiamos el modo
                     break;
                 case "g":
@@ -125,26 +113,26 @@ namespace ObjScaler.servicio
                     g.name = second;
                     if (curMesh == null)
                     {
-                        curMesh = new Mesh("Nonane "+waveFront.o.Count);
-                        waveFront.o.Add(curMesh);
+                        curMesh = new Mesh("Nonane "+waveFront.O.Count);
+                        waveFront.O.Add(curMesh);
                     }
                     curMesh.group.Add(g);
                     //r = ObjMode.group; // cambiamos a modo grupo.
                     break;
                 case "vn":
-                    waveFront.vn.Add(second);
+                    waveFront.Vn.Add(second);
                     break;
                 case "vt":
-                    waveFront.vt.Add(second);
+                    waveFront.Vt.Add(second);
                     break;
                 case "mtllib":
-                    waveFront.mtllib.Add(second);
+                    waveFront.Mtllib.Add(second);
                     break;
                 case "usemtl":
-                    waveFront.usemtl.Add(second);
+                    waveFront.Usemtl.Add(second);
                     break;
                 case "s":
-                    waveFront.s.Add(second);
+                    waveFront.S.Add(second);
                     break;
                 case "v":
                     AddVector(waveFront, line);
@@ -152,8 +140,8 @@ namespace ObjScaler.servicio
                 case "f":
                     if (curMesh == null)
                     {
-                        curMesh = new Mesh("Nonane "+waveFront.o.Count);
-                        waveFront.o.Add(curMesh);
+                        curMesh = new Mesh("Nonane "+waveFront.O.Count);
+                        waveFront.O.Add(curMesh);
                     }
                     if (curGroup == null)
                     {
@@ -168,7 +156,7 @@ namespace ObjScaler.servicio
                 default:
                     if (first.Substring(0, 1) == "#")
                     {
-                        waveFront.com.Add(first.Substring(1));
+                        waveFront.Com.Add(first.Substring(1));
                     }
                     else
                     {
@@ -177,7 +165,6 @@ namespace ObjScaler.servicio
                     break;                    
             }
 
-            return r;
         }
 
         private void AddFace(Group curGroup, string[] line)
@@ -216,12 +203,10 @@ namespace ObjScaler.servicio
                 //error, vector incorrectly defined.
                 throw new Exception("Error in vector");
             }
-
-            var culture = new CultureInfo("en-US");
             Vector vector=new Vector(double.Parse(line[1], culture)
                 ,double.Parse(line[2], culture)
                 ,double.Parse(line[3], culture));
-            waveFront.v.Add(vector);
+            waveFront.V.Add(vector);
         }
 
         private string AddVector( string[] line,Rescale r)
@@ -237,9 +222,9 @@ namespace ObjScaler.servicio
                 ,double.Parse(line[2], culture)
                 ,double.Parse(line[3], culture));
             vector=r.Modify(vector);
-            return "v "+vector.x.ToString("0.########",culture) + " "
-                                              + vector.y.ToString("0.########",culture) + " "
-                                              + vector.z.ToString("0.########",culture);
+            return "v "+vector.X.ToString("0.########",culture) + " "
+                                              + vector.Y.ToString("0.########",culture) + " "
+                                              + vector.Z.ToString("0.########",culture);
 
         }
         private string AddNormal( string[] line,Rescale r)
@@ -255,9 +240,9 @@ namespace ObjScaler.servicio
                 ,double.Parse(line[2], culture)
                 ,double.Parse(line[3], culture));
             vector = r.ModifyNormal(vector);            
-            return "vn "+vector.x.ToString("0.########",culture) + " "
-                                              + vector.y.ToString("0.########",culture) + " "
-                                              + vector.z.ToString("0.########",culture);
+            return "vn "+vector.X.ToString("0.########",culture) + " "
+                                              + vector.Y.ToString("0.########",culture) + " "
+                                              + vector.Z.ToString("0.########",culture);
 
         }
 
@@ -268,17 +253,17 @@ namespace ObjScaler.servicio
         public void ObjGetStat(WaveFront waveFront)
         {
             // reset
-            waveFront.min=new Vector(float.MaxValue,float.MaxValue,float.MaxValue);
-            waveFront.max=new Vector(float.MinValue,float.MinValue,float.MinValue);
+            waveFront.Min=new Vector(float.MaxValue,float.MaxValue,float.MaxValue);
+            waveFront.Max=new Vector(float.MinValue,float.MinValue,float.MinValue);
 
-            foreach (var v in waveFront.v)
+            foreach (var v in waveFront.V)
             {
-                waveFront.min.x = (waveFront.min.x > v.x) ? v.x : waveFront.min.x;
-                waveFront.min.y = (waveFront.min.y > v.y) ? v.y : waveFront.min.y;
-                waveFront.min.z = (waveFront.min.z > v.z) ? v.z : waveFront.min.z;
-                waveFront.max.x = (waveFront.max.x < v.x) ? v.x : waveFront.max.x;
-                waveFront.max.y = (waveFront.max.y < v.y) ? v.y : waveFront.max.y;
-                waveFront.max.z = (waveFront.max.z < v.z) ? v.z : waveFront.max.z;
+                waveFront.Min.X = (waveFront.Min.X > v.X) ? v.X : waveFront.Min.X;
+                waveFront.Min.Y = (waveFront.Min.Y > v.Y) ? v.Y : waveFront.Min.Y;
+                waveFront.Min.Z = (waveFront.Min.Z > v.Z) ? v.Z : waveFront.Min.Z;
+                waveFront.Max.X = (waveFront.Max.X < v.X) ? v.X : waveFront.Max.X;
+                waveFront.Max.Y = (waveFront.Max.Y < v.Y) ? v.Y : waveFront.Max.Y;
+                waveFront.Max.Z = (waveFront.Max.Z < v.Z) ? v.Z : waveFront.Max.Z;
             }
      
         }
@@ -286,24 +271,23 @@ namespace ObjScaler.servicio
 
         public double Scale(Vector max, Vector min,int w,int h, int axis)
         {
-            double r = 1;
-            var maxX = Math.Abs(max.x) > Math.Abs(min.x)?Math.Abs(max.x):Math.Abs(min.x);
-            var maxY = Math.Abs(max.y) > Math.Abs(min.y)?Math.Abs(max.y):Math.Abs(min.y);
-            var maxZ = Math.Abs(max.z) > Math.Abs(min.z)?Math.Abs(max.z):Math.Abs(min.z);
+            var maxX = Math.Abs(max.X) > Math.Abs(min.X)?Math.Abs(max.X):Math.Abs(min.X);
+            var maxY = Math.Abs(max.Y) > Math.Abs(min.Y)?Math.Abs(max.Y):Math.Abs(min.Y);
+            var maxZ = Math.Abs(max.Z) > Math.Abs(min.Z)?Math.Abs(max.Z):Math.Abs(min.Z);
             var maxAll=Math.Max(maxX, maxY);
             maxAll=Math.Max(maxAll, maxZ);
             double minArea = Math.Min(w/2, h/2)-10;
-            r = minArea / maxAll;
+            var r = minArea / maxAll;
 
             return r;
         }
 
         public List<Vector> CloneList(List<Vector> oldList)
         {
-            var newList = new List<Vector>();
-            newList = oldList.ConvertAll(p => p.Clone()).ToList();
+            var newList  = oldList.ConvertAll(p => p.Clone()).ToList();
 
             return newList;
         }
     }
 }
+// Copyright Jorge Castro Castillo March 2018.

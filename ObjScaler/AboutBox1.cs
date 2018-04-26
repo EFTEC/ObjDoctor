@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ObjScaler
+namespace ObjDoctor
 {
     partial class AboutBox1 : Form
     {

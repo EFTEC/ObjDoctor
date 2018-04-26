@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjDoctor", "ObjScaler\ObjD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0D0870CE-21CC-4D9E-8A8F-4143E3E70F18}"
 	ProjectSection(SolutionItems) = preProject
+		docs\image1.jpg = docs\image1.jpg
+		docs\image2.jpg = docs\image2.jpg
 		LICENSE = LICENSE
 		docs\ObjDoctor.gif = docs\ObjDoctor.gif
 		README.md = README.md
