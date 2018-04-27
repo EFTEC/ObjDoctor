@@ -6,7 +6,7 @@ namespace ObjDoctor.model
     public class Group
     {
         public string name;
-        public List<Face> f = new List<Face>();
+        public List<FaceGroup> fg = new List<FaceGroup>();
 
         public Group()
         {

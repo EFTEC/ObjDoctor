@@ -67,6 +67,7 @@
       <DependentUpon>FormResize.cs</DependentUpon>
     </Compile>
     <Compile Include="model\Face.cs" />
+    <Compile Include="model\FaceGroup.cs" />
     <Compile Include="model\Group.cs" />
     <Compile Include="model\Mesh.cs" />
     <Compile Include="model\WaveFront.cs" />

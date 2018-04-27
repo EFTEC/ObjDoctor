@@ -11,7 +11,7 @@ namespace ObjDoctor.servicio
     {
         public Bitmap Draw(WaveFront waveFront,int w,int h,double scale,int axis=0)
         {
-            if (w < 0 && h < 0)
+            if (w <= 0 || h <= 0)
             {
                 w = 100;
                 h = 100;
@@ -73,45 +73,50 @@ namespace ObjDoctor.servicio
                     }
 
                     var color2 = palette[numCol];
-                    int fCount = grupo.f.Count;
+                    int fCount = grupo.fg.Count;
                     fCount = (fCount > 50000) ? 50000 : fCount; // hard limit of 50k vertexs.
                     for (var i = 0; i < fCount; i++)
                     {
-                        int e =(i<grupo.f.Count-1)?i + 1:0; // we close the face
-                        var idxV1 = grupo.f[i];
-                        var idxV2 = grupo.f[e];
-                        var vector = waveFront.V[idxV1.v - 1];
-                        var vector2 = waveFront.V[idxV2.v - 1];
-                        switch (axis)
+                        var curFace = grupo.fg[i];
+                        var curFaceSize = curFace.f.Count;
+                        for (var ifg = 0; ifg < curFaceSize; ifg++)
                         {
-                            case 0:
-                                x =  Convert.ToInt32(vector.X * scale)+halfw;
-                                y = halfh - Convert.ToInt32(vector.Y * scale);
-                                x2 =  Convert.ToInt32(vector2.X * scale)+halfw ;
-                                y2 = halfh - Convert.ToInt32(vector2.Y * scale);
-                                break;
-                            case 1:
-                                x =  Convert.ToInt32(vector.X * scale)+halfw ;
-                                y = halfh - Convert.ToInt32(vector.Z * scale);
-                                x2 =  Convert.ToInt32(vector2.X * scale)+halfw;
-                                y2 = halfh - Convert.ToInt32(vector2.Z * scale);
-                                break;
-                            case 2:
-                                x =  Convert.ToInt32(vector.Y * scale)+halfw;
-                                y = halfh - Convert.ToInt32(vector.Z * scale);
-                                x2 =  Convert.ToInt32(vector2.Y * scale)+halfw;
-                                y2 = halfh - Convert.ToInt32(vector2.Z * scale);
-                                break;
-                            case 3:
-                                
-                                x =  Convert.ToInt32(vector.X+(vector.Z/2) * scale2)+halfw;
-                                y = halfh - Convert.ToInt32(vector.Y+(vector.Z/2) * scale2);
-                                x2 =  Convert.ToInt32(vector2.X+(vector2.Z/2) * scale2)+halfw;
-                                y2 = halfh - Convert.ToInt32(vector2.Y+(vector2.Z/2) * scale2);
-                                break;
-                        }
+                            int ifg1 = (ifg < curFaceSize - 1) ? ifg+ 1 : 0; // we close the face
+                            var idxV1 = curFace.f[ifg];
+                            var idxV2 = curFace.f[ifg1];
+                            var vector = waveFront.V[idxV1.v - 1];
+                            var vector2 = waveFront.V[idxV2.v - 1];
+                            switch (axis)
+                            {
+                                case 0:
+                                    x = Convert.ToInt32(vector.X * scale) + halfw;
+                                    y = halfh - Convert.ToInt32(vector.Y * scale);
+                                    x2 = Convert.ToInt32(vector2.X * scale) + halfw;
+                                    y2 = halfh - Convert.ToInt32(vector2.Y * scale);
+                                    break;
+                                case 1:
+                                    x = Convert.ToInt32(vector.X * scale) + halfw;
+                                    y = halfh - Convert.ToInt32(vector.Z * scale);
+                                    x2 = Convert.ToInt32(vector2.X * scale) + halfw;
+                                    y2 = halfh - Convert.ToInt32(vector2.Z * scale);
+                                    break;
+                                case 2:
+                                    x = Convert.ToInt32(vector.Y * scale) + halfw;
+                                    y = halfh - Convert.ToInt32(vector.Z * scale);
+                                    x2 = Convert.ToInt32(vector2.Y * scale) + halfw;
+                                    y2 = halfh - Convert.ToInt32(vector2.Z * scale);
+                                    break;
+                                case 3:
 
-                        DrawLineInt(bitmap,x,y,x2,y2,color2);
+                                    x = Convert.ToInt32(vector.X + (vector.Z / 2) * scale2) + halfw;
+                                    y = halfh - Convert.ToInt32(vector.Y + (vector.Z / 2) * scale2);
+                                    x2 = Convert.ToInt32(vector2.X + (vector2.Z / 2) * scale2) + halfw;
+                                    y2 = halfh - Convert.ToInt32(vector2.Y + (vector2.Z / 2) * scale2);
+                                    break;
+                            }
+
+                            DrawLineInt(bitmap, x, y, x2, y2, color2);
+                        }
                     }
                 }
             }

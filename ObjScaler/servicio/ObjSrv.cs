@@ -169,6 +169,8 @@ namespace ObjDoctor.servicio
 
         private void AddFace(Group curGroup, string[] line)
         {
+            var fg=new FaceGroup();
+            curGroup.fg.Add(fg);
             for (var i = 1; i < line.Length; i++)
             {
                 var x = line[i];
@@ -192,7 +194,7 @@ namespace ObjDoctor.servicio
                         throw new Exception("Face with too many values");
                 }
 
-                curGroup.f.Add(face);
+                fg.f.Add(face);
             }
         }
 

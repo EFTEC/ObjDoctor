@@ -38,9 +38,9 @@ namespace ObjDoctor
             {
                 foreach (var group in mesh.@group)
                 {
-                    if (group.f.Count > 0)
+                    if (group.fg.Count > 0)
                     {
-                        listBox1.Items.Add(new {id = group.name, txt = group.name + " (" + group.f.Count + ")"});
+                        listBox1.Items.Add(new {id = group.name, txt = group.name + " (" + group.fg.Count + ")"});
                     }
                 }
             }
