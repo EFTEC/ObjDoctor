@@ -13,7 +13,7 @@ of this license document, but changing it is not allowed.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Jorge Castro Castillo")]
 [assembly: AssemblyProduct("ObjScaler")]
-[assembly: AssemblyCopyright("Copyright ©  2018 GPL V3")]
+[assembly: AssemblyCopyright("Copyright ©  2018 Affero GPL V3")]
 [assembly: AssemblyTrademark("Jorge Castro Castillo")]
 [assembly: AssemblyCulture("")]
 
