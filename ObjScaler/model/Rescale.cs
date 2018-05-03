@@ -25,9 +25,14 @@ namespace ObjDoctor.model
         public Vector Modify(Vector v)
         {
             var re = new Vector();
+            /*
             re.X = (v.X + XTranslate) * XScale; 
             re.Y = (v.Y + YTranslate) * YScale; 
             re.Z = (v.Z + ZTranslate) * ZScale; 
+            */
+            re.X = v.X  * XScale+XTranslate; 
+            re.Y = v.Y  * YScale+YTranslate; 
+            re.Z =v.Z * ZScale+ZTranslate; 
             return re;
         }
         public Vector ModifyNormal(Vector v)
